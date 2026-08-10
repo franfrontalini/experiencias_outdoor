@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>TRAMA — Experiencias de aprendizaje para equipos</title>
+<meta name="description" content="TRAMA diseña experiencias de aprendizaje para equipos que ponen en acción habilidades clave: comunicación, coordinación, liderazgo y toma de decisiones." />
+<style>
+/* ============================================================
+   TRAMA — Design System (aplicado desde claude.ai/design)
+   Tokens: colors / typography / spacing / effects · Font: Manrope
+   ============================================================ */
+
+/* ---- Manrope (variable 200–800), self-hosted Google CDN ---- */
+@font-face{font-family:'Manrope';font-style:normal;font-weight:200 800;font-display:swap;src:url(https://fonts.gstatic.com/s/manrope/v20/xn7gYHE41ni1AdIRggmxSuXd.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'Manrope';font-style:normal;font-weight:200 800;font-display:swap;src:url(https://fonts.gstatic.com/s/manrope/v20/xn7gYHE41ni1AdIRggexSg.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+
+:root{
+  /* base palette */
+  --carbon-900:#20211F;
+  --carbon-700:color-mix(in oklch,var(--carbon-900) 80%,white);
+  --carbon-500:color-mix(in oklch,var(--carbon-900) 55%,white);
+  --carbon-300:color-mix(in oklch,var(--carbon-900) 28%,white);
+  --carbon-100:color-mix(in oklch,var(--carbon-900) 8%,white);
+  --warm-white:#F6F4EE;
+  --green-900:color-mix(in oklch,var(--green-700) 80%,black);
+  --green-700:#31594A;
+  --green-500:color-mix(in oklch,var(--green-700) 68%,white);
+  --green-300:color-mix(in oklch,var(--green-700) 38%,white);
+  --green-100:color-mix(in oklch,var(--green-700) 14%,white);
+  --terracotta-700:color-mix(in oklch,var(--terracotta-500) 78%,black);
+  --terracotta-500:#E66A3C;
+  --terracotta-300:color-mix(in oklch,var(--terracotta-500) 52%,white);
+  --terracotta-100:color-mix(in oklch,var(--terracotta-500) 14%,white);
+  --mist-700:color-mix(in oklch,var(--mist-500) 75%,black);
+  --mist-500:#B9CDD0;
+  --mist-300:color-mix(in oklch,var(--mist-500) 55%,white);
+  --mist-100:color-mix(in oklch,var(--mist-500) 24%,white);
+
+  /* semantic aliases */
+  --color-bg:var(--warm-white);
+  --color-bg-inverse:var(--carbon-900);
+  --color-surface:#FFFFFF;
+  --color-surface-sunken:var(--mist-100);
+  --color-border:color-mix(in oklch,var(--carbon-900) 12%,white);
+  --color-border-strong:color-mix(in oklch,var(--carbon-900) 32%,white);
+  --color-text:var(--carbon-900);
+  --color-text-muted:var(--carbon-500);
+  --color-text-inverse:var(--warm-white);
+  --color-primary:var(--green-700);
+  --color-primary-hover:var(--green-900);
+  --color-primary-tint:var(--green-100);
+  --color-accent:var(--terracotta-500);
+  --color-accent-hover:var(--terracotta-700);
+  --color-accent-tint:var(--terracotta-100);
+  --color-secondary:var(--mist-500);
+  --color-secondary-tint:var(--mist-100);
+  --color-focus-ring:var(--terracotta-500);
+
+  /* type */
+  --font-sans:'Manrope',-apple-system,'Segoe UI',Roboto,sans-serif;
+  --weight-regular:400;--weight-medium:500;--weight-semibold:600;--weight-bold:700;--weight-extrabold:800;
+  --tracking-tight:-0.01em;--tracking-normal:0em;--tracking-wide:0.04em;--tracking-wordmark:0.06em;
+
+  /* spacing */
+  --space-2:8px;--space-3:12px;--space-4:16px;--space-6:24px;--space-8:32px;--space-10:40px;
+  --space-12:48px;--space-16:64px;--space-20:80px;--space-24:96px;--space-32:128px;
+
+  /* effects */
+  --radius-sm:4px;--radius-md:8px;--radius-lg:16px;--radius-full:999px;
+  --shadow-sm:0 1px 2px rgba(32,33,31,0.08);
+  --shadow-md:0 4px 12px rgba(32,33,31,0.10);
+  --shadow-lg:0 12px 32px rgba(32,33,31,0.16);
+  --ease-standard:cubic-bezier(0.4,0,0.2,1);
+  --ease-out:cubic-bezier(0,0,0.2,1);
+  --duration-fast:120ms;--duration-base:200ms;--duration-slow:320ms;
+
+  --maxw:1120px;
+  --gut:clamp(24px,5vw,48px);
+}
+
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;}
+body{
+  margin:0;font-family:var(--font-sans);color:var(--color-text);background:var(--color-bg);
+  font-size:16px;line-height:1.6;font-weight:var(--weight-regular);
+}
+img{max-width:100%;display:block;}
+a{color:inherit;text-decoration:none;}
+h1,h2,h3{margin:0;font-weight:var(--weight-bold);letter-spacing:var(--tracking-tight);}
+h1{font-size:clamp(40px,6vw,64px);line-height:1.05;font-weight:var(--weight-bold);}
+h2{font-size:clamp(28px,4vw,34px);line-height:1.15;}
+h3{font-size:clamp(20px,2.4vw,24px);line-height:1.3;font-weight:var(--weight-semibold);}
+p{margin:0;}
+
+.wrap{max-width:var(--maxw);margin:0 auto;padding-inline:var(--gut);}
+.pad{padding-block:clamp(72px,10vw,96px);}
+section{position:relative;}
+
+/* Eyebrow / category label */
+.eyebrow{
+  font-size:13px;font-weight:var(--weight-semibold);letter-spacing:var(--tracking-wide);
+  text-transform:uppercase;color:var(--color-primary);display:block;
+}
+.eyebrow.on-dark{color:var(--mist-300);}
+.lead{font-size:clamp(17px,1.5vw,19px);line-height:1.55;color:var(--color-text-muted);max-width:60ch;}
+
+/* Trama category tag: "TRAMA / X" */
+.cat{font-size:13px;font-weight:var(--weight-semibold);letter-spacing:var(--tracking-wide);
+  text-transform:uppercase;color:var(--color-primary);display:inline-flex;gap:6px;align-items:center;}
+.cat .slash{color:var(--carbon-900);font-weight:var(--weight-regular);}
+
+/* Buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  font-family:var(--font-sans);font-weight:var(--weight-semibold);border-radius:var(--radius-sm);
+  border:1px solid transparent;cursor:pointer;padding:12px 20px;font-size:15px;
+  transition:background var(--duration-fast) var(--ease-out),border-color var(--duration-fast) var(--ease-out),color var(--duration-fast) var(--ease-out);}
+.btn.lg{padding:16px 28px;font-size:16px;}
+.btn-primary{background:var(--color-primary);color:var(--color-text-inverse);border-color:var(--color-primary);}
+.btn-primary:hover{background:var(--color-primary-hover);border-color:var(--color-primary-hover);}
+.btn-accent{background:var(--color-accent);color:var(--color-text-inverse);border-color:var(--color-accent);}
+.btn-accent:hover{background:var(--color-accent-hover);border-color:var(--color-accent-hover);}
+.btn-secondary{background:transparent;color:var(--carbon-900);border-color:var(--color-border-strong);}
+.btn-secondary:hover{background:var(--color-surface-sunken);border-color:var(--carbon-900);}
+.btn-secondary.on-dark{color:var(--warm-white);border-color:var(--mist-300);}
+.btn-secondary.on-dark:hover{background:rgba(246,244,238,0.12);border-color:var(--warm-white);}
+
+/* Trama pattern layer */
+.trama{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:hidden;}
+.trama svg{width:100%;height:100%;display:block;}
+.content{position:relative;z-index:1;}
+
+/* Photo placeholder (documentary direction — real shoot pending) */
+.photo{position:relative;border-radius:var(--radius-md);overflow:hidden;background:var(--color-surface-sunken);
+  border:1px solid var(--color-border);}
+.photo .ph-cap{position:absolute;left:16px;bottom:14px;z-index:2;font-size:12px;line-height:1.4;
+  color:var(--color-text-muted);font-style:italic;max-width:70%;}
+.photo.on-dark{background:rgba(246,244,238,0.05);border-color:rgba(246,244,238,0.14);}
+.photo.on-dark .ph-cap{color:var(--mist-300);}
+.prod-media img,.photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;}
+
+/* =================== NAV =================== */
+.nav{position:sticky;top:0;z-index:50;background:color-mix(in oklch,var(--warm-white) 88%,transparent);
+  backdrop-filter:saturate(140%) blur(10px);border-bottom:1px solid transparent;transition:border-color var(--duration-base);}
+.nav.stuck{border-color:var(--color-border);}
+.nav-in{display:flex;align-items:center;justify-content:space-between;height:68px;}
+.wordmark{font-size:22px;font-weight:var(--weight-extrabold);letter-spacing:var(--tracking-wordmark);color:var(--carbon-900);}
+.nav-links{display:flex;gap:32px;align-items:center;}
+.nav-links a{font-size:14px;font-weight:var(--weight-medium);color:var(--color-text-muted);transition:color var(--duration-fast);}
+.nav-links a:hover{color:var(--carbon-900);}
+.nav-links .btn{color:var(--color-text-inverse);}
+.nav-cta{padding:9px 16px;font-size:14px;}
+@media(max-width:860px){.nav-links a:not(.nav-cta){display:none;}}
+
+/* =================== HERO =================== */
+.hero{background:var(--color-bg-inverse);overflow:hidden;}
+.hero .trama{opacity:.35;}
+.hero .wrap{position:relative;z-index:1;padding-block:clamp(88px,12vw,120px);}
+.hero-inner{max-width:800px;}
+.hero .eyebrow{margin-bottom:20px;}
+.hero h1{color:var(--warm-white);max-width:14ch;}
+.hero p.lead{color:var(--mist-300);margin-top:24px;max-width:56ch;}
+.hero-cta{display:flex;flex-wrap:wrap;gap:14px;margin-top:40px;}
+
+/* Concept strip */
+.concept{background:var(--color-bg);}
+.concept .wrap{display:grid;grid-template-columns:1fr 1fr;gap:clamp(32px,6vw,64px);align-items:start;}
+.concept .big{font-size:clamp(24px,3.4vw,34px);line-height:1.2;font-weight:var(--weight-bold);color:var(--carbon-900);max-width:16ch;}
+.concept .body{display:flex;flex-direction:column;gap:16px;color:var(--color-text-muted);font-size:clamp(17px,1.5vw,19px);line-height:1.55;padding-top:6px;}
+@media(max-width:820px){.concept .wrap{grid-template-columns:1fr;}}
+
+/* =================== PROBLEMA =================== */
+.problem{background:var(--color-surface-sunken);}
+.problem-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(32px,6vw,72px);align-items:start;}
+.problem h2{margin-top:14px;max-width:18ch;}
+.chal{list-style:none;margin:0;padding:0;}
+.chal li{display:flex;gap:14px;align-items:flex-start;padding:14px 0;border-bottom:1px solid var(--color-border);
+  font-size:16px;color:var(--carbon-900);}
+.chal li:last-child{border-bottom:none;}
+.chal .dot{flex:none;margin-top:9px;width:6px;height:6px;border-radius:var(--radius-full);background:var(--color-accent);}
+.note{margin-top:24px;padding:20px 24px;border-radius:var(--radius-md);background:var(--color-surface);
+  border:1px solid var(--color-border);color:var(--color-text-muted);font-size:16px;}
+.note b{color:var(--carbon-900);font-weight:var(--weight-semibold);}
+@media(max-width:820px){.problem-grid{grid-template-columns:1fr;}}
+
+/* =================== QUÉ HACEMOS — flujo =================== */
+.doing .head{max-width:720px;}
+.doing h2{margin-top:14px;}
+.doing .lead{margin-top:20px;}
+.flow{display:flex;align-items:stretch;gap:0;margin-top:clamp(40px,6vw,56px);flex-wrap:wrap;}
+.flow-step{flex:1 1 180px;min-width:150px;background:var(--color-surface);border:1px solid var(--color-border);
+  border-radius:var(--radius-md);padding:24px 20px;}
+.flow-step .fn{font-size:13px;font-weight:var(--weight-bold);letter-spacing:var(--tracking-wide);color:var(--color-primary);}
+.flow-step h3{margin:10px 0 6px;font-size:19px;}
+.flow-step p{font-size:14px;color:var(--color-text-muted);line-height:1.45;}
+.flow-arrow{display:flex;align-items:center;justify-content:center;color:var(--color-primary);flex:0 0 40px;}
+.flow-arrow svg{width:20px;height:20px;}
+@media(max-width:900px){
+  .flow{flex-direction:column;max-width:460px;}
+  .flow-arrow{flex-basis:auto;transform:rotate(90deg);padding:4px 0;}
+}
+
+/* =================== QUÉ TRABAJAMOS — skills =================== */
+.skills .head{max-width:640px;}
+.skills h2{margin-top:14px;}
+.skills-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--color-border);
+  border:1px solid var(--color-border);border-radius:var(--radius-md);overflow:hidden;margin-top:clamp(36px,5vw,48px);}
+.skill{background:var(--color-surface);padding:28px 24px;transition:background var(--duration-base);}
+.skill:hover{background:var(--color-surface-sunken);}
+.skill .sk-ic{width:30px;height:30px;color:var(--color-primary);margin-bottom:16px;}
+.skill h3{font-size:19px;font-weight:var(--weight-bold);color:var(--color-primary);margin-bottom:8px;}
+.skill p{font-size:14px;color:var(--color-text-muted);line-height:1.5;}
+@media(max-width:900px){.skills-grid{grid-template-columns:1fr 1fr;}}
+@media(max-width:520px){.skills-grid{grid-template-columns:1fr;}}
+
+/* =================== PRODUCTOS =================== */
+.products{background:var(--color-surface-sunken);}
+.products .head{margin-bottom:clamp(36px,5vw,48px);max-width:20ch;}
+.products h2{margin-top:14px;}
+.prod-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+.prod{background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-md);
+  overflow:hidden;display:flex;flex-direction:column;transition:border-color var(--duration-base),box-shadow var(--duration-base);}
+.prod:hover{border-color:var(--color-border-strong);box-shadow:var(--shadow-md);}
+.prod-media{aspect-ratio:16/10;position:relative;background:var(--color-surface-sunken);border-bottom:1px solid var(--color-border);}
+.prod-media .ph-cap{position:absolute;left:14px;bottom:12px;z-index:2;font-size:12px;color:var(--color-text-muted);font-style:italic;}
+.prod-body{padding:24px;display:flex;flex-direction:column;flex:1;}
+.prod-body h3{margin:12px 0 8px;font-size:22px;font-weight:var(--weight-bold);color:var(--carbon-900);}
+.prod-body p{font-size:15px;color:var(--color-text-muted);line-height:1.5;flex:1;}
+.pills{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px;}
+.pill{font-size:13px;font-weight:var(--weight-medium);color:var(--carbon-900);background:var(--color-surface-sunken);
+  border-radius:var(--radius-full);padding:4px 12px;}
+@media(max-width:900px){.prod-grid{grid-template-columns:1fr;max-width:440px;}}
+
+/* =================== DIFERENCIAL =================== */
+.diff{background:var(--color-bg-inverse);overflow:hidden;}
+.diff .trama{opacity:.22;}
+.diff .head{position:relative;z-index:1;max-width:22ch;}
+.diff h2{margin-top:14px;color:var(--warm-white);}
+.diff-grid{position:relative;z-index:1;display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:clamp(40px,5vw,52px);}
+.dcard{border-radius:var(--radius-md);padding:28px 24px;border:1px solid rgba(246,244,238,0.14);background:rgba(246,244,238,0.04);}
+.dcard.primary{background:var(--color-primary);border-color:var(--color-primary);}
+.dcard .dk{font-size:12px;font-weight:var(--weight-semibold);letter-spacing:var(--tracking-wide);text-transform:uppercase;color:var(--mist-300);}
+.dcard.primary .dk{color:rgba(246,244,238,0.8);}
+.dcard h3{margin:12px 0 8px;color:var(--warm-white);font-size:20px;font-weight:var(--weight-bold);}
+.dcard p{font-size:15px;line-height:1.5;color:var(--mist-300);}
+.dcard.primary p{color:rgba(246,244,238,0.92);}
+.diff-foot{position:relative;z-index:1;margin-top:32px;font-size:16px;color:var(--mist-300);max-width:60ch;}
+.diff-foot b{color:var(--warm-white);font-weight:var(--weight-medium);}
+@media(max-width:820px){.diff-grid{grid-template-columns:1fr;}}
+
+/* =================== CÓMO FUNCIONA — hilo 01→05 =================== */
+.process .head{max-width:640px;}
+.process h2{margin-top:14px;}
+.steps{position:relative;margin-top:clamp(48px,6vw,64px);}
+.steps-line{position:absolute;top:21px;left:0;right:0;height:1px;
+  background:repeating-linear-gradient(90deg,var(--color-border-strong) 0 6px,transparent 6px 14px);z-index:0;}
+.steps-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:20px;position:relative;z-index:1;}
+.step .node{width:42px;height:42px;border-radius:var(--radius-full);background:var(--color-bg);border:1.5px solid var(--color-primary);
+  display:flex;align-items:center;justify-content:center;font-weight:var(--weight-bold);font-size:14px;color:var(--color-primary);margin-bottom:16px;}
+.step h3{font-size:18px;font-weight:var(--weight-bold);margin-bottom:6px;}
+.step p{font-size:14px;color:var(--color-text-muted);line-height:1.45;}
+@media(max-width:900px){
+  .steps-grid{grid-template-columns:1fr;gap:0;}
+  .steps-line{display:none;}
+  .step{display:grid;grid-template-columns:42px 1fr;gap:16px;padding-bottom:24px;position:relative;}
+  .step:not(:last-child)::before{content:"";position:absolute;left:20px;top:42px;bottom:0;width:1px;
+    background:repeating-linear-gradient(180deg,var(--color-border-strong) 0 5px,transparent 5px 11px);}
+  .step .node{margin-bottom:0;}
+}
+
+/* =================== ABIERTAS =================== */
+.open .wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(36px,6vw,64px);align-items:center;}
+.open h2{margin-top:14px;}
+.open .lead{margin-top:20px;}
+.open .btn{margin-top:32px;}
+.open-media{aspect-ratio:5/4;}
+.next{margin-top:24px;font-size:13px;color:var(--color-text-muted);display:flex;gap:8px;align-items:center;}
+.next svg{width:15px;height:15px;color:var(--color-primary);flex:none;}
+.dates{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:28px;}
+.date{display:flex;flex-direction:column;padding:12px 18px;border:1px solid var(--color-border-strong);border-radius:var(--radius-md);background:var(--color-surface);}
+.date .d-day{font-size:12px;font-weight:var(--weight-semibold);letter-spacing:var(--tracking-wide);text-transform:uppercase;color:var(--color-primary);}
+.date .d-num{font-size:20px;font-weight:var(--weight-bold);color:var(--carbon-900);letter-spacing:var(--tracking-tight);}
+.cupos{font-size:13px;font-weight:var(--weight-semibold);color:var(--color-accent);border:1px solid var(--color-accent);border-radius:var(--radius-full);padding:6px 14px;}
+@media(max-width:820px){.open .wrap{grid-template-columns:1fr;}.open-media{order:-1;aspect-ratio:16/10;}}
+
+/* =================== EVIDENCIA =================== */
+.proof{background:var(--color-surface-sunken);}
+.proof .head{max-width:640px;}
+.proof h2{margin-top:14px;}
+.proof-metrics{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:clamp(36px,5vw,48px);}
+.metric{background:var(--color-surface);border:1px dashed var(--color-border-strong);border-radius:var(--radius-md);padding:32px;text-align:center;}
+.metric .mv{font-size:clamp(40px,6vw,56px);line-height:1;font-weight:var(--weight-extrabold);color:var(--color-accent);letter-spacing:var(--tracking-tight);}
+.metric .ml{margin-top:12px;font-size:15px;color:var(--color-text-muted);}
+.metric .pend{display:inline-block;margin-top:14px;font-size:12px;letter-spacing:var(--tracking-wide);text-transform:uppercase;
+  color:var(--color-text-muted);border:1px solid var(--color-border);border-radius:var(--radius-full);padding:4px 12px;}
+.testis{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:16px;}
+.testi{background:var(--color-surface);border:1px dashed var(--color-border-strong);border-radius:var(--radius-md);padding:24px;display:flex;flex-direction:column;}
+.testi blockquote{margin:0;font-size:17px;color:var(--carbon-900);line-height:1.45;flex:1;font-weight:var(--weight-medium);}
+.testi .who{margin-top:20px;font-size:13px;color:var(--color-text-muted);}
+.proof-note{margin-top:24px;font-size:13px;color:var(--color-text-muted);font-style:italic;}
+@media(max-width:820px){.proof-metrics{grid-template-columns:1fr;}.testis{grid-template-columns:1fr;}}
+
+/* =================== CIERRE =================== */
+.close{background:var(--color-bg-inverse);overflow:hidden;}
+.close .trama{opacity:.28;}
+.close .wrap{position:relative;z-index:1;}
+.close-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(32px,6vw,72px);align-items:center;}
+.close h2{color:var(--warm-white);max-width:16ch;margin:14px 0 16px;}
+.close .lead{color:var(--mist-300);margin-bottom:32px;}
+.close-cta{display:flex;gap:14px;flex-wrap:wrap;}
+.contact-card{background:var(--color-surface);border-radius:var(--radius-md);padding:28px;}
+.contact-card h3{color:var(--carbon-900);font-size:19px;font-weight:var(--weight-bold);margin-bottom:16px;}
+.crow{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--color-border);color:var(--carbon-900);font-size:15px;}
+.crow:last-child{border-bottom:none;}
+.crow svg{width:18px;height:18px;color:var(--color-primary);flex:none;}
+@media(max-width:820px){.close-grid{grid-template-columns:1fr;}}
+
+/* =================== FOOTER =================== */
+.foot{background:var(--color-bg);border-top:1px solid var(--color-border);}
+.foot .wrap{display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap;padding-block:40px;}
+.foot .wordmark{font-size:18px;}
+.foot .tag{font-size:12px;color:var(--color-text-muted);margin-top:4px;}
+.foot-cats{display:flex;gap:24px;flex-wrap:wrap;}
+.foot-nav{display:flex;gap:24px;flex-wrap:wrap;font-size:14px;color:var(--color-text-muted);width:100%;padding-top:24px;border-top:1px solid var(--color-border);margin-top:4px;}
+.foot-nav a:hover{color:var(--carbon-900);}
+
+/* Reveal */
+.reveal{opacity:0;transform:translateY(16px);transition:opacity var(--duration-slow) var(--ease-out),transform var(--duration-slow) var(--ease-out);}
+.reveal.in{opacity:1;transform:none;}
+@media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none;}html{scroll-behavior:auto;}}
+</style>
+</head>
+<body>
+
+<!-- ================= NAV ================= -->
+<header class="nav" id="nav">
+  <div class="wrap nav-in">
+    <a href="#top" class="wordmark">TRAMA</a>
+    <nav class="nav-links">
+      <a href="#productos">Experiencias</a>
+      <a href="#proceso">Cómo funciona</a>
+      <a href="#abiertas">Abiertas</a>
+      <a href="#contacto">Contacto</a>
+      <a href="https://wa.me/5493512315618?text=Hola%20TRAMA%2C%20quiero%20dise%C3%B1ar%20una%20experiencia%20para%20mi%20equipo." target="_blank" rel="noopener" class="btn btn-primary nav-cta">Hablemos</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- ================= HERO ================= -->
+<section class="hero" id="hero">
+  <div class="trama" data-trama data-seed="11" data-nodes="14" data-density="0.35" data-color="var(--mist-500)" aria-hidden="true"></div>
+  <div class="wrap">
+    <div class="hero-inner reveal">
+      <span class="eyebrow on-dark">Experiencias de aprendizaje para equipos</span>
+      <h1>Experiencias para trabajar mejor juntos.</h1>
+      <p class="lead">Diseñamos experiencias de aprendizaje para equipos que ponen en acción habilidades clave: comunicación, coordinación, liderazgo y toma de decisiones.</p>
+      <div class="hero-cta">
+        <a href="https://wa.me/5493512315618?text=Hola%20TRAMA%2C%20quiero%20dise%C3%B1ar%20una%20experiencia%20para%20mi%20equipo." target="_blank" rel="noopener" class="btn btn-accent lg">Diseñemos una experiencia para tu equipo</a>
+        <a href="#abiertas" class="btn btn-secondary lg on-dark">Ver próximas experiencias abiertas</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CONCEPTO ================= -->
+<section class="concept pad">
+  <div class="wrap">
+    <div class="big reveal">Trama es lo que se construye entre las personas.</div>
+    <div class="body reveal">
+      <p>Un equipo no funciona únicamente por las capacidades individuales de sus integrantes, sino por cómo se conectan, comunican, coordinan, deciden y actúan juntos.</p>
+      <p>TRAMA crea experiencias para poner esas relaciones en acción y convertirlas en aprendizaje.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PROBLEMA ================= -->
+<section class="problem pad" id="problema">
+  <div class="wrap">
+    <div class="problem-grid">
+      <div class="reveal">
+        <span class="eyebrow">El problema</span>
+        <h2>Trabajar juntos no siempre significa trabajar bien juntos.</h2>
+        <div class="note">
+          Muchas veces estos problemas son difíciles de ver dentro de la rutina habitual. <b>TRAMA crea situaciones donde esas dinámicas aparecen, se experimentan y se convierten en aprendizaje.</b>
+        </div>
+      </div>
+      <div class="reveal">
+        <ul class="chal">
+          <li><span class="dot"></span>Información que no circula.</li>
+          <li><span class="dot"></span>Falta de coordinación.</li>
+          <li><span class="dot"></span>Decisiones lentas.</li>
+          <li><span class="dot"></span>Roles poco claros.</li>
+          <li><span class="dot"></span>Liderazgos demasiado concentrados.</li>
+          <li><span class="dot"></span>Dificultades para escuchar, pedir ayuda o construir acuerdos.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= QUÉ HACEMOS ================= -->
+<section class="doing pad" id="quehacemos">
+  <div class="wrap">
+    <div class="head reveal">
+      <span class="eyebrow">Qué hacemos</span>
+      <h2>Aprender haciendo, juntos.</h2>
+      <p class="lead">Diseñamos experiencias en las que los equipos deben enfrentar desafíos concretos, tomar decisiones, organizarse y alcanzar objetivos comunes. Después de la acción, facilitamos una instancia de reflexión para identificar qué ocurrió, qué funcionó y qué aprendizajes pueden trasladarse al trabajo cotidiano.</p>
+    </div>
+    <div class="flow reveal">
+      <div class="flow-step"><span class="fn">01</span><h3>Desafío</h3><p>Una situación concreta que exige al equipo.</p></div>
+      <div class="flow-arrow"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="flow-step"><span class="fn">02</span><h3>Acción</h3><p>El equipo se organiza, decide y avanza.</p></div>
+      <div class="flow-arrow"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="flow-step"><span class="fn">03</span><h3>Reflexión</h3><p>Observamos juntos qué pasó y por qué.</p></div>
+      <div class="flow-arrow"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="flow-step"><span class="fn">04</span><h3>Aprendizaje</h3><p>Prácticas que vuelven al trabajo cotidiano.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= QUÉ TRABAJAMOS ================= -->
+<section class="skills pad" id="skills">
+  <div class="wrap">
+    <div class="head reveal">
+      <span class="eyebrow">Qué trabajamos</span>
+      <h2>Habilidades que hacen funcionar a los equipos</h2>
+    </div>
+    <div class="skills-grid reveal">
+      <div class="skill">
+        <svg class="sk-ic" viewBox="0 0 24 24" fill="none"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <h3>Comunicación</h3>
+        <p>Compartir información, escuchar y construir entendimiento.</p>
+      </div>
+      <div class="skill">
+        <svg class="sk-ic" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.5"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        <h3>Coordinación</h3>
+        <p>Organizar personas, roles y recursos para avanzar.</p>
+      </div>
+      <div class="skill">
+        <svg class="sk-ic" viewBox="0 0 24 24" fill="none"><path d="M12 3l2.5 5 5.5.8-4 3.9.95 5.5L12 15.5 7.1 18.2 8 12.7l-4-3.9L9.5 8 12 3z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>
+        <h3>Liderazgo</h3>
+        <p>Movilizar al equipo, asumir responsabilidades y habilitar a otros.</p>
+      </div>
+      <div class="skill">
+        <svg class="sk-ic" viewBox="0 0 24 24" fill="none"><path d="M9 18l-1 3M15 18l1 3M4 6h16M6 6l1.5 9h9L18 6M9 10.5l1.5 1.5L14 8.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <h3>Toma de decisiones</h3>
+        <p>Decidir con distintas perspectivas, restricciones e incertidumbre.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PRODUCTOS ================= -->
+<section class="products pad" id="productos">
+  <div class="wrap">
+    <div class="head reveal">
+      <span class="eyebrow">Productos</span>
+      <h2>Experiencias según el desafío de cada equipo</h2>
+    </div>
+    <div class="prod-grid">
+      <article class="prod reveal">
+        <div class="prod-media"><img src="img/outdoor-desarrollo.jpg" alt="Equipo de TRAMA en ronda al aire libre durante una experiencia outdoor" loading="lazy" /></div>
+        <div class="prod-body">
+          <span class="cat">TRAMA <span class="slash">/</span> Outdoor</span>
+          <h3>Desarrollo de Equipos</h3>
+          <p>Experiencias outdoor para practicar y fortalecer habilidades de trabajo en equipo.</p>
+          <div class="pills"><span class="pill">Comunicación</span><span class="pill">Coordinación</span><span class="pill">Liderazgo</span><span class="pill">Decisiones</span></div>
+        </div>
+      </article>
+      <article class="prod reveal">
+        <div class="prod-media"><img src="img/outdoor-jornadas.jpg" alt="Dos integrantes coordinando con una cuerda en una jornada de equipo" loading="lazy" /></div>
+        <div class="prod-body">
+          <span class="cat">TRAMA <span class="slash">/</span> Outdoor</span>
+          <h3>Jornadas de Equipo</h3>
+          <p>Jornadas de integración, kick-off y team building diseñadas para combinar una buena experiencia con propósito y aprendizaje.</p>
+          <div class="pills"><span class="pill">Fin de año</span><span class="pill">Integración</span><span class="pill">Kick-off</span><span class="pill">Encuentros</span></div>
+        </div>
+      </article>
+      <article class="prod reveal">
+        <div class="prod-media"><img src="img/facilitacion.jpg" alt="Conversación cercana y momento de decisión durante una facilitación" loading="lazy" /></div>
+        <div class="prod-body">
+          <span class="cat">TRAMA <span class="slash">/</span> Facilitación</span>
+          <h3>Desafíos reales del equipo</h3>
+          <p>Espacios para trabajar sobre desafíos reales del equipo y avanzar hacia resultados concretos.</p>
+          <div class="pills"><span class="pill">Conversaciones</span><span class="pill">Prioridades</span><span class="pill">Objetivos</span><span class="pill">Alineación</span></div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ================= DIFERENCIAL ================= -->
+<section class="diff pad" id="diferencial">
+  <div class="trama" data-trama data-seed="5" data-nodes="12" data-density="0.3" data-color="var(--mist-500)" aria-hidden="true"></div>
+  <div class="wrap">
+    <div class="head reveal">
+      <span class="eyebrow on-dark">El diferencial</span>
+      <h2>No es solo una actividad. Tampoco es una capacitación tradicional.</h2>
+    </div>
+    <div class="diff-grid">
+      <div class="dcard reveal">
+        <span class="dk">Team building tradicional</span>
+        <h3>Compartir y pasarla bien</h3>
+        <p>Un buen momento en común, pero sin una intención de aprendizaje explícita.</p>
+      </div>
+      <div class="dcard reveal">
+        <span class="dk">Capacitación tradicional</span>
+        <h3>Incorporar conceptos</h3>
+        <p>Contenido valioso, pero que muchas veces no se traduce en cómo el equipo actúa.</p>
+      </div>
+      <div class="dcard primary reveal">
+        <span class="dk">TRAMA</span>
+        <h3>Poner al equipo en acción</h3>
+        <p>Observar comportamientos y aprender de la experiencia. Del hacer al aprendizaje que se traslada.</p>
+      </div>
+    </div>
+    <p class="diff-foot reveal">Cada propuesta puede diseñarse <b>de acuerdo con el momento, las características y los objetivos del equipo.</b></p>
+  </div>
+</section>
+
+<!-- ================= CÓMO FUNCIONA ================= -->
+<section class="process pad" id="proceso">
+  <div class="wrap">
+    <div class="head reveal">
+      <span class="eyebrow">Cómo funciona</span>
+      <h2>De la necesidad a la experiencia</h2>
+    </div>
+    <div class="steps reveal">
+      <div class="steps-line"></div>
+      <div class="steps-grid">
+        <div class="step"><div class="node">01</div><h3>Entender</h3><p>Conversamos sobre el equipo y el desafío.</p></div>
+        <div class="step"><div class="node">02</div><h3>Diseñar</h3><p>Seleccionamos y adaptamos la experiencia.</p></div>
+        <div class="step"><div class="node">03</div><h3>Experimentar</h3><p>El equipo enfrenta desafíos y situaciones concretas.</p></div>
+        <div class="step"><div class="node">04</div><h3>Reflexionar</h3><p>Facilitamos una conversación sobre lo ocurrido y sus aprendizajes.</p></div>
+        <div class="step"><div class="node">05</div><h3>Transferir</h3><p>Identificamos prácticas aplicables al trabajo cotidiano.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ABIERTAS ================= -->
+<section class="open pad" id="abiertas">
+  <div class="wrap">
+    <div class="reveal">
+      <span class="eyebrow">Experiencias abiertas</span>
+      <h2>También podés vivir TRAMA</h2>
+      <p class="lead">Realizamos experiencias abiertas para profesionales, estudiantes, emprendedores y personas interesadas en desarrollar habilidades de trabajo en equipo. Sirven además como espacio de experimentación, encuentro y aprendizaje entre perfiles diversos.</p>
+      <div class="dates">
+        <div class="date"><span class="d-day">Sábado</span><span class="d-num">26/09</span></div>
+        <div class="date"><span class="d-day">Sábado</span><span class="d-num">24/10</span></div>
+        <div class="date"><span class="d-day">Sábado</span><span class="d-num">28/11</span></div>
+        <span class="cupos">Cupos limitados</span>
+      </div>
+      <a href="https://wa.me/5493512315618?text=Hola%20TRAMA%2C%20quiero%20conocer%20la%20pr%C3%B3xima%20experiencia%20abierta." target="_blank" rel="noopener" class="btn btn-primary lg" style="margin-top:24px;">Quiero conocer la próxima edición</a>
+    </div>
+    <div class="reveal">
+      <div class="photo open-media"><img src="img/abiertas.jpg?v=2" alt="Grupo diverso de participantes en una experiencia abierta de TRAMA" loading="lazy" /></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= EVIDENCIA ================= -->
+<section class="proof pad" id="evidencia">
+  <div class="wrap">
+    <div class="head reveal">
+      <span class="eyebrow">Lo que pasa después de una experiencia</span>
+      <h2>La evidencia la construimos con los pilotos</h2>
+    </div>
+    <div class="proof-metrics reveal">
+      <div class="metric"><div class="mv">NPS</div><div class="ml">Nivel de recomendación</div><span class="pend">A completar con datos reales</span></div>
+      <div class="metric"><div class="mv">— / 5</div><div class="ml">Evaluación general</div><span class="pend">A completar con datos reales</span></div>
+    </div>
+    <div class="testis reveal">
+      <div class="testi"><blockquote>“Testimonio breve del equipo…”</blockquote><span class="who">Nombre · Rol / organización</span></div>
+      <div class="testi"><blockquote>“Testimonio breve del equipo…”</blockquote><span class="who">Nombre · Rol / organización</span></div>
+      <div class="testi"><blockquote>“Testimonio breve del equipo…”</blockquote><span class="who">Nombre · Rol / organización</span></div>
+    </div>
+    <p class="proof-note">Esta sección se completa con las respuestas reales de las primeras experiencias. No se muestran datos hasta tenerlos.</p>
+  </div>
+</section>
+
+<!-- ================= CIERRE ================= -->
+<section class="close pad" id="contacto">
+  <div class="trama" data-trama data-seed="33" data-nodes="13" data-density="0.32" data-color="var(--mist-500)" aria-hidden="true"></div>
+  <div class="wrap">
+    <div class="close-grid">
+      <div class="reveal">
+        <span class="eyebrow on-dark">Cierre</span>
+        <h2>¿Querés trabajar algo distinto con tu equipo?</h2>
+        <p class="lead">Contanos qué está pasando y diseñamos una experiencia acorde al desafío.</p>
+        <div class="close-cta">
+          <a href="https://wa.me/5493512315618?text=Hola%20TRAMA%2C%20quiero%20trabajar%20algo%20distinto%20con%20mi%20equipo." target="_blank" rel="noopener" class="btn btn-accent lg">Hablemos por WhatsApp</a>
+          <a href="#abiertas" class="btn btn-secondary lg on-dark">Ver experiencias abiertas</a>
+        </div>
+      </div>
+      <div class="contact-card reveal">
+        <h3>Contanos sobre tu equipo</h3>
+        <div class="crow"><svg viewBox="0 0 24 24" fill="none"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2z" stroke="currentColor" stroke-width="1.5"/><path d="M22 7l-10 6L2 7" stroke="currentColor" stroke-width="1.5"/></svg>Escribinos por email</div>
+        <a class="crow" href="https://wa.me/5493512315618?text=Hola%20TRAMA%2C%20quiero%20trabajar%20algo%20distinto%20con%20mi%20equipo." target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none"><path d="M21 15.5a2 2 0 0 1-2.2 2A19 19 0 0 1 6.5 5.2 2 2 0 0 1 8.5 3h2.1a2 2 0 0 1 2 1.7c.13.9.35 1.8.66 2.6a2 2 0 0 1-.45 2.1l-1 1a15 15 0 0 0 5.6 5.6l1-1a2 2 0 0 1 2.1-.45c.85.3 1.7.53 2.6.66a2 2 0 0 1 1.7 2z" stroke="currentColor" stroke-width="1.5"/></svg>WhatsApp · +54 9 351 231 5618</a>
+        <div class="crow"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3l2.5 5 5.5.8-4 3.9.95 5.5L12 15.5 7.1 18.2 8 12.7l-4-3.9L9.5 8 12 3z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>Diseñamos una propuesta a medida</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ================= FOOTER ================= -->
+<footer class="foot">
+  <div class="wrap">
+    <div>
+      <div class="wordmark">TRAMA</div>
+      <div class="tag">Experiencias de aprendizaje para equipos.</div>
+    </div>
+    <div class="foot-cats">
+      <span class="cat">TRAMA <span class="slash">/</span> Outdoor</span>
+      <span class="cat">TRAMA <span class="slash">/</span> Jornadas</span>
+      <span class="cat">TRAMA <span class="slash">/</span> Facilitación</span>
+    </div>
+    <nav class="foot-nav">
+      <a href="#top">TRAMA</a>
+      <a href="#productos">Experiencias</a>
+      <a href="#proceso">Cómo funciona</a>
+      <a href="#abiertas">Abiertas</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+  </div>
+</footer>
+
+<script>
+  // --- Trama pattern (portado de components/visuals/TramaPattern.jsx) ---
+  function makeRand(seed){var s=seed%233280;return function(){s=(s*9301+49297)%233280;return s/233280;};}
+  function tramaSVG(seed,nodes,density,color){
+    var rand=makeRand(seed),W=400,H=240,pts=[],i,j;
+    for(i=0;i<nodes;i++)pts.push([20+rand()*(W-40),20+rand()*(H-40)]);
+    var s='<svg viewBox="0 0 '+W+' '+H+'" width="100%" height="100%" preserveAspectRatio="xMidYMid slice">';
+    for(i=0;i<pts.length;i++)for(j=i+1;j<pts.length;j++){if(rand()<density)s+='<line x1="'+pts[i][0]+'" y1="'+pts[i][1]+'" x2="'+pts[j][0]+'" y2="'+pts[j][1]+'" stroke="'+color+'" stroke-width="1" opacity="0.45"/>';}
+    for(i=0;i<pts.length;i++)s+='<circle cx="'+pts[i][0]+'" cy="'+pts[i][1]+'" r="3.5" fill="'+color+'"/>';
+    return s+'</svg>';
+  }
+  document.querySelectorAll('[data-trama]').forEach(function(el){
+    el.innerHTML=tramaSVG(
+      parseInt(el.dataset.seed||'1',10),
+      parseInt(el.dataset.nodes||'9',10),
+      parseFloat(el.dataset.density||'0.5'),
+      el.dataset.color||'var(--color-primary)'
+    );
+  });
+
+  // Nav border on scroll
+  var nav=document.getElementById('nav');
+  function onScroll(){nav.classList.toggle('stuck',window.scrollY>8);}
+  window.addEventListener('scroll',onScroll,{passive:true});onScroll();
+
+  // Reveal
+  var io=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
+  },{threshold:.12,rootMargin:'0px 0px -8% 0px'});
+  document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
+</script>
+</body>
+</html>
