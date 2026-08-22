@@ -6,6 +6,9 @@
 <title>TRAMA — Experiencias de aprendizaje para equipos</title>
 <meta name="description" content="TRAMA diseña experiencias de aprendizaje para equipos que ponen en acción habilidades clave: objetivos, información, coordinación y comunicación." />
 <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2032%2032'%3E%3Crect%20width='32'%20height='32'%20rx='6'%20fill='%2331594A'/%3E%3Ctext%20x='16'%20y='23'%20font-family='Arial,sans-serif'%20font-size='20'%20font-weight='800'%20letter-spacing='0.5'%20fill='%23F6F4EE'%20text-anchor='middle'%3ET%3C/text%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@700&display=swap" rel="stylesheet" />
 <style>
 /* ============================================================
    TRAMA — Design System (aplicado desde claude.ai/design)
@@ -146,6 +149,9 @@ section{position:relative;}
 .nav.stuck{border-color:var(--color-border);}
 .nav-in{display:flex;align-items:center;justify-content:space-between;height:68px;}
 .wordmark{font-size:22px;font-weight:var(--weight-extrabold);letter-spacing:var(--tracking-wordmark);color:var(--carbon-900);}
+.logo-link{display:inline-flex;align-items:center;}
+.logo{height:34px;width:auto;display:block;color:var(--carbon-900);}
+.foot .logo{height:30px;}
 .nav-links{display:flex;gap:32px;align-items:center;}
 .nav-links a{font-size:14px;font-weight:var(--weight-medium);color:var(--color-text-muted);transition:color var(--duration-fast);}
 .nav-links a:hover{color:var(--carbon-900);}
@@ -374,7 +380,15 @@ section{position:relative;}
 <!-- ================= NAV ================= -->
 <header class="nav" id="nav">
   <div class="wrap nav-in">
-    <a href="#top" class="wordmark">TRAMA</a>
+    <a href="#top" class="logo-link" aria-label="TRAMA — inicio">
+      <svg class="logo" viewBox="0 0 372 150" role="img" aria-label="TRAMA" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <text x="0" y="96" textLength="372" lengthAdjust="spacingAndGlyphs" font-family="'Schibsted Grotesk','Manrope',sans-serif" font-weight="700" font-size="100" letter-spacing="3" fill="currentColor">TRAMA</text>
+        <path d="M0 130 H89 L138 116 H210 L253 130 H372" stroke="#31594A" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="89" cy="130" r="5" fill="#F6F4EE" stroke="#31594A" stroke-width="3"/>
+        <circle cx="138" cy="116" r="5.5" fill="#E66A3C"/>
+        <circle cx="253" cy="130" r="5" fill="#31594A"/>
+      </svg>
+    </a>
     <nav class="nav-links">
       <a href="#productos">Experiencias</a>
       <a href="#quehacemos">Cómo funciona</a>
@@ -688,7 +702,13 @@ section{position:relative;}
 <footer class="foot">
   <div class="wrap">
     <div>
-      <div class="wordmark">TRAMA</div>
+      <svg class="logo" viewBox="0 0 372 150" role="img" aria-label="TRAMA" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <text x="0" y="96" textLength="372" lengthAdjust="spacingAndGlyphs" font-family="'Schibsted Grotesk','Manrope',sans-serif" font-weight="700" font-size="100" letter-spacing="3" fill="currentColor">TRAMA</text>
+        <path d="M0 130 H89 L138 116 H210 L253 130 H372" stroke="#31594A" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="89" cy="130" r="5" fill="#F6F4EE" stroke="#31594A" stroke-width="3"/>
+        <circle cx="138" cy="116" r="5.5" fill="#E66A3C"/>
+        <circle cx="253" cy="130" r="5" fill="#31594A"/>
+      </svg>
       <div class="tag">Experiencias de aprendizaje para equipos.</div>
     </div>
     <div class="foot-cats">
