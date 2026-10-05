@@ -1,13 +1,11 @@
 /**
- * TRAMA — Receptor del formulario de la landing.
- * Pegá este código en Apps Script (ver SETUP.md), publicá como Web App
- * y copiá la URL en FORM_ENDPOINT dentro de script.js.
+ * TRAMA — Receptor del formulario de la landing /jornadas.
+ * Guarda cada consulta en la Sheet y avisa por mail.
  */
 
-// Pestaña donde se escriben las consultas.
 var SHEET_NAME = 'Consultas';
+var NOTIFY_EMAIL = 'franfrontalini@gmail.com';   // a quién avisar
 
-// Orden de columnas (debe coincidir con la fila de encabezados de la hoja).
 var HEADERS = [
   'Fecha', 'Nombre', 'Empresa', 'Cargo', 'WhatsApp', 'Email',
   'Actividad', 'Personas', 'Mes', 'Mensaje',
@@ -35,9 +33,48 @@ function doPost(e) {
       p.pagina || '', p.enviado_en || ''
     ]);
 
+    notify_(p);
+
     return json({ result: 'ok' });
   } catch (err) {
     return json({ result: 'error', error: String(err) });
+  }
+}
+
+/** Manda el mail de aviso. Si falla, no interrumpe el guardado. */
+function notify_(p) {
+  try {
+    var actividad = p.actividad || 'Sin especificar';
+    var contacto = [];
+    if (p.whatsapp) contacto.push('WhatsApp: ' + p.whatsapp);
+    if (p.email) contacto.push('Email: ' + p.email);
+
+    var subject = 'Nueva consulta TRAMA — ' + actividad + ': ' + (p.nombre || 's/nombre');
+
+    var body =
+      'Nueva consulta desde la landing /jornadas\n' +
+      '----------------------------------------\n\n' +
+      'Nombre:    ' + (p.nombre || '-') + '\n' +
+      'Empresa:   ' + (p.empresa || '-') + '\n' +
+      'Cargo:     ' + (p.cargo || '-') + '\n' +
+      (contacto.length ? contacto.join('\n') + '\n' : 'Contacto:  -\n') +
+      'Actividad: ' + actividad + '\n' +
+      'Personas:  ' + (p.personas || '-') + '\n' +
+      'Mes:       ' + (p.mes || '-') + '\n' +
+      'Mensaje:   ' + (p.mensaje || '-') + '\n\n' +
+      'Origen (reel): ' + (p.variante || '-') +
+        (p.utm_source ? '  ·  utm_source=' + p.utm_source : '') + '\n' +
+      'Página: ' + (p.pagina || '-') + '\n' +
+      'Fecha:  ' + new Date().toLocaleString('es-AR');
+
+    var options = { name: 'TRAMA · /jornadas' };
+    if (p.email && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(p.email)) {
+      options.replyTo = p.email;   // responder directo al interesado
+    }
+
+    MailApp.sendEmail(NOTIFY_EMAIL, subject, body, options);
+  } catch (err) {
+    // Silencioso: un fallo de mail no debe tirar abajo el guardado.
   }
 }
 
