@@ -7,7 +7,7 @@
 /* ►►► ÚNICO LUGAR A CONFIGURAR ◄◄◄
    Pegá la URL del Web App de Google Apps Script (ver SETUP.md).
    Vacío = el form valida y confirma, pero NO envía datos todavía. */
-var FORM_ENDPOINT = "";
+var FORM_ENDPOINT = "https://script.google.com/macros/s/AKfycbwpHwq119sgqfZh92wA6ULMu6jXbXM8qFleM-2KMziSmqdow6TWSHnyqrjDCtLpLXB5/exec";
 
 /* Actividad preseleccionada según el reel de origen (?v=) */
 var ACTIVITY_BY_V = {
